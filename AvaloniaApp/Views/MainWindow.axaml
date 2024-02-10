@@ -1,0 +1,148 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="925" d:DesignHeight="425"
+        x:Class="AvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApp">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Grid Margin="50">
+    <!-- Отдельный грид для указанных элементов -->
+    <Grid.RowDefinitions>
+      <RowDefinition Height="100"/>
+      <RowDefinition Height="65"/>
+      <RowDefinition Height="25"/>
+    </Grid.RowDefinitions>
+    
+    <Grid Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width ="200"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Первая колонка - "Введите данные" -->
+      <StackPanel Grid.Column="0" Margin="0" Width="200">
+        <TextBox Height="75"
+                 Watermark="Введите данные"
+                 Text="{Binding NonScrambledMessage}"
+                 />
+      </StackPanel>
+      <!-- Вторая колонка - Кнопки -->
+      <StackPanel Grid.Column="1" Width="200">
+        <Button Width="200" 
+                Command="{Binding SrambleButton}" 
+                Content="Скремблирование"
+                />
+        <Button Width="200" 
+                Command="{Binding OpenFileToScrambleButton}" 
+                Content="Открыть файл с текст. данными"
+                />
+      </StackPanel>
+      <!-- Третья колонка - Поле ввода "Скремблированные данные" -->
+      <StackPanel Grid.Column="2" Width="200">
+        <TextBox Height="75"
+                 Watermark="Скремблированные данные"
+                 Text="{Binding ScrambledMessage}"
+                 />
+      </StackPanel>
+      <!-- Четвертая колонка - еще 3 кнопки -->
+      <StackPanel Grid.Column="3" Width="200">
+        <Button Width="200"
+                Command="{Binding DeSrambleButton}"
+                Content="Де-скремблирование"
+                />
+        <Button Command="{Binding OpenFileToDescrambleButton}"
+                Content="Открыть файл со скремблированными данными"
+                />
+        <Button Command="{Binding SaveScrambledFaleButton}"
+                Content="Сохранить файл со скремблированными файлами"
+                />
+      </StackPanel>
+    </Grid>
+    <!--Второй грид-->
+    <Grid Grid.Row="1" Margin="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width="200"/>
+        <ColumnDefinition Width ="200"/>
+      </Grid.ColumnDefinitions>
+
+      <StackPanel Grid.Column="0">
+        <TextBox IsReadOnly="True"
+                 Width="200" 
+                 Watermark="Бинарный код"
+                 Text="{Binding BinaryMessage}"
+                 />
+      </StackPanel>
+      <StackPanel Grid.Column="1">
+        <Button Width="200"
+                Command="{Binding BinaryToMessageButton}"
+                Content="Бинарные данные в текст"
+                />
+      </StackPanel>
+      <StackPanel Grid.Column="2">
+        <TextBox Width="200"
+                 Watermark="Де-скремблированные данные"
+                 Text="{Binding DeScrambledMessage}"
+                 />
+      </StackPanel>
+      <StackPanel Grid.Column="3">
+        <Button Width="200" 
+                Content="Сохранить файл с де-скраблированными данными"
+                />
+      </StackPanel>
+
+    </Grid>
+    <!-- Третий грид -->
+    <Grid Grid.Row="2" Margin="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="400"/>
+        <ColumnDefinition Width="400"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- 3.1 -->
+      <StackPanel Grid.Column="0">
+        <TextBox Text="{Binding ScrambleKeyMessage}"
+                 Watermark="Ключ"
+                 />
+        <Button Width="400"
+                Command="{Binding OpenAudioFileButton}"
+                Content="Открыть аудио файл с данными"
+                />
+        <TextBox Text="{Binding OpenWavPathMessage}"/>
+        <Button Width="400"
+                Command="{Binding SaveAudioFileButton}"
+                Content="Скремблирование аудио файла с данными"
+                />
+        <TextBox Text="{Binding SaveWavPathMessage}"/>
+      </StackPanel>
+
+      <!-- 3.2 -->
+      <StackPanel Grid.Column="1">
+        <TextBox Watermark="Ключ"
+                 Text="{Binding ScrambledWavKeyMessage}"
+                 />
+        <Button Command="{Binding OpenScrambledAudioFileButton }"
+                Content="Открыть аудио файл со скремблированными данными"
+                />
+        <TextBox Text="{Binding ScrambledOpenWavPathMessage}"/>
+        <Button Width="400" 
+                Command="{Binding SaveDescrambledAudioFileButton}"
+                Content="Де-скремблирование аудио файла с данными"
+                />
+        <TextBox Text="{Binding ScrambledSaveWavPathMessage}"/>
+      </StackPanel>
+    </Grid>
+  </Grid>
+  
+</Window>
